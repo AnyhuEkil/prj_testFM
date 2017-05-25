@@ -5,15 +5,24 @@
 	request.setCharacterEncoding("UTF-8");
 	String path = request.getContextPath();
 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	//dao, dto 세팅 
 	AuctionItemDAO dao = new AuctionItemDAO();
 	AuctionItemVO dto = new AuctionItemVO();
-	dto.setAuctionId(1);
+	
+	
+	int itemID = 1;//현재 1번 아이템 경매
+	dto.setAuctionId(itemID);
+
+	// 아이템 정보
+	String itemName = dao.infoItem(dto).getItemName(); //###
+	double curBid = dao.infoItem(dto).getCurrentBidAmount(); //###
+	String startDate = sdf.format(dao.infoItem(dto).getStartDate());
+	String endDate = sdf.format(dao.infoItem(dto).getEndDate());
+
 	//	날짜 변환. sql에서 rs.getDate로 테이블의 마감시간값을 따오면 yyyy/MM/dd로만 표시되서 
 	//	SimpleDateFormat으로 날짜형식을 변형함.
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	String day = sdf.format(dao.info(dto).getEndDate());
-	double curBid = dao.info(dto).getCurrentBidAmount(); //###
+
 	int boundary[] = {0, 5000, 50000, 10000000};
 	int increaseBid[] = {1000, 2000, 3000};
 	int interval = 0;
@@ -32,7 +41,7 @@
 <title>AUCTION</title>
 <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="<%=path%>/z03_CSS/auction_main.css">
+	href="<%=path%>/z03_CSS/auction_main.css?ver=1.0">
 <script type="text/javascript">
 $(document).ready(function(){	
 	$("input[name = curr]").attr("disabled", true);		
@@ -47,7 +56,7 @@ $(document).ready(function(){
 
 		function setTime(){
 	var sysday = new Date();
-	var dday = new Date("<%=day%>");
+	var dday = new Date("<%=endDate%>");
 		var gap = parseInt((dday.getTime() - sysday.getTime()) / 1000);
 		var days = parseInt(gap / (60 * 60 * 24));
 		var hours = parseInt((gap % (60 * 60 * 24)) / (60 * 60));
@@ -74,13 +83,13 @@ $(document).ready(function(){
 			<h2>
 				<b>Item Name</b>
 			</h2>
-			<p>Name DB</p>
+			<p><%=itemName%></p>
 			<h2>Item Condition</h2>
 			<p>Condition DB</p>
 			<h2>Start Date</h2>
-			<P>Date DB</P>
+			<P><%=startDate%></P>
 			<h2>End Date</h2>
-			<p>Date DB</p>
+			<p><%=endDate%></p>
 		</div>
 		<div id="countdown_info">
 			<h1>Time Left</h1>
@@ -97,13 +106,14 @@ $(document).ready(function(){
 				<pre></pre>
 				<button>Place Bid</button>
 				<br /> <input type=text name=hiddenBidderId
-					value=<%=dao.info(dto).getAuctionId()%> style="visibility: hidden;" />
+					value=<%=dao.infoItem(dto).getAuctionId()%>
+					style="visibility: hidden;" />
 			</form>
 		</div>
 		<div id="seller_info">
 			<h3>Seller Informaton</h3>
 			<h4>Name</h4>
-			<p>Ronaldo</p>
+			<p>ITEM ID : <%=itemID %></p>
 			<h4>Phone Number</h4>
 			<p>777777777</p>
 		</div>

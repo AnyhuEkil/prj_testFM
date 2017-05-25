@@ -10,30 +10,21 @@ public class AuctionBidDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-//	private void setConn() throws ClassNotFoundException, SQLException {
-//
-//		Class.forName("oracle.jdbc.driver.OracleDriver");
-//		String conInfo = "jdbc:oracle:thin:@192.168.0.110:1522:orcl";
-//		con = DriverManager.getConnection(conInfo, "cto", "qqqq");
-//		System.out.println("접속문제");
-//	}
-
-	public AuctionBidVO getAuction_Bid(AuctionBidVO sch) {
-		AuctionBidVO aub = null;
+	public AuctionBidVO infoBid(AuctionBidVO sch) {
+		AuctionBidVO ib = null;
 
 		try {
-//			setConn();
-			con = ConnectDB.conn();
-			String sql = "select * from Auction_Bid where auctionID=? ";
+			con = ConnectDB.conn(); // setConn();를 대체함
+			String sql = "select * from Auction_Bid where auction_ID=? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sch.getAuctionID());
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				aub = new AuctionBidVO();
-				aub.setBidderID(rs.getInt(1));
-				aub.setAuctionID(rs.getInt(2));
-				aub.setBiddingDate(rs.getDate(3));
-				aub.setBidAmount(rs.getDouble(4));
+				ib = new AuctionBidVO();
+				ib.setBidderID(rs.getInt(1));
+				ib.setAuctionID(rs.getInt(2));
+				ib.setBiddingDate(rs.getDate(3));
+				ib.setBidAmount(rs.getDouble(4));
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -42,30 +33,20 @@ public class AuctionBidDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if (rs != null)
-				try {
+			try {
+				if (rs != null)
 					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if (pstmt != null)
-				try {
+				if (pstmt != null)
 					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
+				if (con != null)
 					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
-		return aub;
+		return ib;
 	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

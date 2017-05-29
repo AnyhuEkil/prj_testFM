@@ -36,7 +36,7 @@
 </style>
 </head>
 <body>
-	<form method="post" action="login_check.jsp">
+	<form method="post" action="signProc.jsp">
 		<table>
 			<tr>
 				<th>아이디</th>

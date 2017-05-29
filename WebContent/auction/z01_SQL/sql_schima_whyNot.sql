@@ -371,7 +371,7 @@ INSERT INTO auction_bid (BIDDER_ID,
              SYSDATE,
              1300);
 
-COMMIT;
+
 
 SELECT * FROM AUCTION_BID;
 SELECT * FROM AUCTION_item;
@@ -383,8 +383,10 @@ INSERT INTO auction_user (USER_NAME,
                           EMAIL,
                           REGISTER_DATE)
      VALUES ('킹왕짱',
-             'qqq',
+             'whywhy',
              'why@not',
              SYSDATE);
 
 SELECT COUNT(*) FROM AUCTION_USER;
+
+COMMIT;

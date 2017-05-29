@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8" import="java.util.*, java.text.*"
 	import="z02_vo.*" import="z01_database.*"%>
 <%
@@ -10,11 +11,11 @@
 	AuctionItemDAO dao = new AuctionItemDAO();
 	AuctionItemVO dto = new AuctionItemVO();
 	
-	
 	int itemID = 1;//현재 1번 아이템 경매
 	dto.setAuctionId(itemID);
 
 	// 아이템 정보
+	int auctioneerId = dao.infoItem(dto).getAuctioneerId(); //###
 	String itemName = dao.infoItem(dto).getItemName(); //###
 	double curBid = dao.infoItem(dto).getCurrentBidAmount(); //###
 	String startDate = sdf.format(dao.infoItem(dto).getStartDate());
@@ -84,8 +85,8 @@ $(document).ready(function(){
 				<b>Item Name</b>
 			</h2>
 			<p><%=itemName%></p>
-			<h2>Item Condition</h2>
-			<p>Condition DB</p>
+			<h2>Item Condition ->  ITEM ID</h2>
+			<p>Condition DB -> <%=itemID %> </p>
 			<h2>Start Date</h2>
 			<P><%=startDate%></P>
 			<h2>End Date</h2>
@@ -112,10 +113,10 @@ $(document).ready(function(){
 		</div>
 		<div id="seller_info">
 			<h3>Seller Informaton</h3>
-			<h4>Name</h4>
-			<p>ITEM ID : <%=itemID %></p>
+			<h4>Name - > Auctioneer ID</h4>
+			<p><%=auctioneerId %></p>
 			<h4>Phone Number</h4>
-			<p>777777777</p>
+			<p>010-7777-7777(none DB)</p>
 		</div>
 	</div>
 </body>

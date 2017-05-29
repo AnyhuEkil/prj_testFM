@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import z02_vo.Member;
 
-public class SignupDAO {
+public class SignUpDAO {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
@@ -142,7 +142,7 @@ public class SignupDAO {
 		}
 	}
 	public static void main(String[] args) {
-		SignupDAO db = new SignupDAO();		
+		SignUpDAO db = new SignUpDAO();		
 		System.out.println(db.checkLogin("ADMIN", "ADMIN"));
 		System.out.println(db.confirmId("futuure"));
 		

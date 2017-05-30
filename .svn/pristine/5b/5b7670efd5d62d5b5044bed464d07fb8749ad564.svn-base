@@ -4,33 +4,26 @@
 	font-family: "Comic Sans MS";
 }
 
+h2 {
+	margin-left: 30px;
+	line-height: 60px;
+	color: blue;
+}
 
 h1 {
 	text-align: center;
-	font-size: 50px;
+	font-size: 40px;
 	color: blue;
 }
-
-h2 {
-	margin-left: 30px;
-	line-height: 50px;
-	color: blue;
-}
-
 
 h3 {
 	margin-left: 30px;
-	line-height: 50px;
-}
-
-h4 {
-	line-height: 30px;
-	margin-left: 50px;
+	line-height: 60px;
 }
 
 p {
 	margin-left: 70px;
-	line-height: 40px;
+	line-height: 60px;
 }
 
 div {
@@ -44,28 +37,19 @@ div {
 	border: 3px solid black;
 }
 
-#hello {
-	margin: 2%;
-	width: 90%;
-	height: 5%;
-	float: left;
-}
-
 #item_picture {
 	margin: 2%;
 	width: 45%;
-	height: 40%;
+	height: 50%;
 	float: left;
-	background-image:url("../img/apple.png"); 
-	background-repeat:no-repeat;
-	background-size: contain;
-	background-position: center;
+	background: url("javaFile/test1.png") no-repeat center;
+	border: 1px dotted black;
 }
 
 #item_info {
 	margin: 2%;
 	width: 45%;
-	height: 40%;
+	height: 50%;
 	float: left;
 	border: 1px solid black;
 	border-radius: 10px;
@@ -107,3 +91,4 @@ div {
 	margin-left: 30px;
 	line-height: 0;
 }
+
